@@ -1,0 +1,38 @@
+
+// Custom Theming for NG-ZORRO
+// For more information: https://ng.ant.design/docs/customize-theme/en
+@import "../node_modules/ng-zorro-antd/ng-zorro-antd.less";
+@import './app/infrastructure/styles/color/colors.less';
+
+
+// Override less variables to here
+// View all variables: https://github.com/NG-ZORRO/ng-zorro-antd/blob/master/components/style/themes/default.less
+
+// @primary-color: #1890ff;
+
+@theme: default;
+
+// The prefix to use on all css classes from ant.
+@ant-prefix: ant;
+
+// An override for the html selector for theme prefixes
+@html-selector: html;
+
+// [CSS-VARIABLE-REPLACE-BEGIN: html-variables]
+// [CSS-VARIABLE-REPLACE-END: html-variables]
+
+// -------- Colors -----------
+// >>> Primary
+@primary-color: @blue-base;
+@primary-color-hover: color(~`colorPalette('@{primary-color}', 5) `);
+@primary-color-active: color(~`colorPalette('@{primary-color}', 7) `);
+@primary-color-outline: fade(@primary-color, @outline-fade);
+
+// Checkbox
+@checkbox-size: 16px;
+@checkbox-color: @primary-color;
+@checkbox-check-color: #fff;
+@checkbox-check-bg: @checkbox-check-color;
+@checkbox-border-width: @border-width-base;
+@checkbox-border-radius: @border-radius-base;
+@checkbox-group-item-margin-right: 8px;
