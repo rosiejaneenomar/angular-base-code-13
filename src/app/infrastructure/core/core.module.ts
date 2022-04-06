@@ -1,7 +1,14 @@
-import { HttpClientInterceptor } from './http-client-interceptor.service';
-import { HttpClientModule } from '@angular/common/http';
-import { AppInitializerService } from './app-initializer.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { AppInitializerService } from './app-initializer.service';
+import { HttpClientInterceptor } from './http-client-interceptor.service';
+
+
+export function initializeApp1(appInitService: AppInitializerService) {
+  return (): Promise<any> => { 
+    return appInitService.Init();
+  }
+}
 
 @NgModule({
   imports: [
@@ -11,9 +18,8 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
   declarations: [],
   providers: [
     AppInitializerService,
-    HttpClientInterceptor,
-    { provide: APP_INITIALIZER, useClass: AppInitializerService },
-    { provide: HttpClientModule, useClass: HttpClientInterceptor}
+    { provide: APP_INITIALIZER, useFactory: initializeApp1, deps: [AppInitializerService], multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: HttpClientInterceptor, multi: true}
   ],
 })
 export class CoreModule { }
